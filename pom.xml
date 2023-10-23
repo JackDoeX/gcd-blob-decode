@@ -3,12 +3,12 @@
   <groupId>xyz.doejack.filenet</groupId>
   <artifactId>gcd-blob-decode</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.1</version>
+  <version>0.1.2-SNAPSHOT</version>
   <name>gcd-blob-decode</name>
   <url>http://maven.apache.org</url>
   <scm>
     <developerConnection>scm:git:git@github.com:JackDoeX/gcd-blob-decode.git</developerConnection>
-    <tag>gcd-blob-decode-0.1.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <build>
     <plugins>
