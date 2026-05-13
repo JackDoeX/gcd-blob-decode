@@ -3,33 +3,21 @@ name: Publish Release & Package
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
       packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          server-id: github
-          settings-path: ${{ github.workspace }}
+          java-version: "17"
+          distribution: "temurin"
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/*.jar
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
