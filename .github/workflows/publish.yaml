@@ -1,23 +1,30 @@
-name: Publish Release & Package
+name: Release
 
 on:
   push:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-publish:
-    runs-on: self-hosted
-    permissions:
-      contents: write
-      packages: write
+  release:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v4
-      - name: Set up JDK 17
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
           distribution: "temurin"
+          java-version: "17"
+
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn clean package
+
+      - name: Upload JAR to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/*.jar
